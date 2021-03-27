@@ -1,0 +1,16 @@
+P|Johan|Hansson
+T|0702714898|0555
+A|Lingonstigen|Karlshamn|374 40
+F|Ebbe|2013
+T|070999999|
+F|Alfred|2017
+A|Lingonstigen|Karlshamn|27449
+T||
+F||
+A|||
+A|||
+F||
+P|Oskar|Olsson
+F|Anna|9999
+A|Hemma|På|Gatan
+P|Last|Person
