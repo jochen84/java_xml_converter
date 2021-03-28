@@ -10,11 +10,12 @@ public class App {
 
     public static void main( String[] args ) {
 
-        Scanner sc = new Scanner(System.in);
-        System.out.println("Enter file you want to convert:");
-        String filePath = sc.nextLine();
-        File inputFile = new File(filePath);
-        //File inputFile = new File("input/konvertera1.txt");
+
+        //Scanner sc = new Scanner(System.in);
+        //System.out.println("Enter file you want to convert:");
+        //String filePath = sc.nextLine();
+        //File inputFile = new File(filePath);
+        File inputFile = new File("input/konvertera2.txt");
 
         ConvertFileName convertFileName = new ConvertFileName();
         String newFileName = convertFileName.getNewFileName(inputFile.getName());

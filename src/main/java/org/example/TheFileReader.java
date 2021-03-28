@@ -1,5 +1,7 @@
 package org.example;
 
+import org.example.exception.NoFileToConvertException;
+
 import java.io.*;
 import java.util.ArrayList;
 import java.util.List;
@@ -18,7 +20,7 @@ public class TheFileReader {
             }
             fileScanner.close();
         } catch (FileNotFoundException e){
-            //throw new FileNotFoundException("File not found");
+            throw new NoFileToConvertException("Something wrong with the input file");
         }
         return fileTextLines;
     }

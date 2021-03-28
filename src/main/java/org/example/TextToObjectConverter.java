@@ -24,6 +24,7 @@ public class TextToObjectConverter {
 
         for ( String line : lines ) {
             String[] lineValues = line.split("\\|", -1);
+            boolean hasBadComments =  checkIfValuesContainsBadComments(lineValues);
             boolean toManyValues = checkIfToManyValuesInLine(lineValues);
             textToObjectTagsBuilder(lineValues);
         }
@@ -64,6 +65,15 @@ public class TextToObjectConverter {
             default:
                 throw new IllegalArgumentException("Input tag: [" + tag + "], does not exist, check your text file");
         }
+    }
+
+    private boolean checkIfValuesContainsBadComments(String[] lineValues){
+        for (String value : lineValues){
+            if (value.contains("<!--") && !value.contains("-->")) {
+                throw new IllegalArgumentException("Bad comments");
+            }
+        }
+        return false;
     }
 
     private boolean checkIfToManyValuesInLine(String[] lineValues) {
