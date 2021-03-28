@@ -7,7 +7,7 @@ import java.util.Scanner;
 
 public class TheFileReader {
 
-    public List<String> readTextFile(File src) throws FileNotFoundException {
+    public List<String> readTextFile(File src) {
         List<String> fileTextLines = new ArrayList<>();
 
         try {
@@ -18,7 +18,7 @@ public class TheFileReader {
             }
             fileScanner.close();
         } catch (FileNotFoundException e){
-            throw new FileNotFoundException("File not found");
+            //throw new FileNotFoundException("File not found");
         }
         return fileTextLines;
     }
