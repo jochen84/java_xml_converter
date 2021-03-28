@@ -29,11 +29,11 @@ public class PersonTag extends Tag {
     }
 
     public String getFirstNameWithTag(){
-        return "<firstname>" + firstName + "</firstname>";
+        return firstName.isEmpty() ? "<firstname/>" : "<firstname>" + firstName + "</firstname>";
     }
 
     public String getLastNameWithTag(){
-        return "<lastname>" + lastName + "</lastname>";
+        return lastName.isEmpty() ? "<lastname/>" : "<lastname>" + lastName + "</lastname>";
     }
 
     @Override

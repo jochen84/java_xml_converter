@@ -38,13 +38,13 @@ public class AddressTag extends Tag {
     }
 
     public String getStreetWithTag() {
-        return "<street>" + street + "</street>";
+        return street.isEmpty() ? "<street/>" : "<street>" + street + "</street>";
     }
     public String getCitytWithTag() {
-        return "<city>" + city + "</city>";
+        return city.isEmpty() ? "<city/>" : "<city>" + city + "</city>";
     }
     public String getZipcodeWithTag() {
-        return "<zipcode>" + zipCode + "</zipcode>";
+        return  zipCode.isEmpty() ? "<zipcode/>" : "<zipcode>" + zipCode + "</zipcode>";
     }
 
     @Override

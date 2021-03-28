@@ -28,11 +28,11 @@ public class PhoneTag extends Tag {
     }
 
     public String getMobileWithTag(){
-        return "<mobile>" + mobile  + "</mobile>";
+        return mobile.isEmpty() ? "<mobile/>" : "<mobile>" + mobile + "</mobile>";
     }
 
     public String getHomeWithTag(){
-        return "<home>" + home  + "</home>";
+        return home.isEmpty() ? "<home/>" : "<home>" + home + "</home>";
     }
 
     @Override

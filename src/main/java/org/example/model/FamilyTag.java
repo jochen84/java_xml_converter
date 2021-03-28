@@ -28,11 +28,11 @@ public class FamilyTag extends Tag {
     }
 
     public String getNameWithTag() {
-        return "<name>" + name + "</name>";
+        return name.isEmpty() ? "<name/>" : "<name>" + name + "</name>";
     }
 
     public String getBornWithTag() {
-        return "<born>" + born + "</born>";
+        return born.isEmpty() ? "<born/>" : "<born>" + born + "</born>";
     }
 
     @Override
