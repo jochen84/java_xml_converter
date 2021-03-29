@@ -37,36 +37,56 @@ public class TextToObjectConverter {
         String tag = lineValues[TAG];
         switch (tag) {
             case "P":
-                try {
-                    objectTags.add(new PersonTag(lineValues[TAG], lineValues[FIRSTNAME], lineValues[LASTNAME]));
-                } catch (IndexOutOfBoundsException e) {
-                    throw new IndexOutOfBoundsException("Something wrong with the input in a Person tag at row: " + lineCounter);
-                }
+                buildPersonObject(lineValues);
                 break;
             case "T":
-                try {
-                    objectTags.add(new PhoneTag(lineValues[TAG], lineValues[MOBILE], lineValues[HOME]));
-                } catch (IndexOutOfBoundsException e) {
-                    throw new IndexOutOfBoundsException("Something wrong with the input in a Phone tag at row: " + lineCounter);
-                }
+                buildPhoneObject(lineValues);
                 break;
             case "A":
-                try {
-                    objectTags.add(new AddressTag(lineValues[TAG], lineValues[STREET], lineValues[CITY], lineValues[ZIP]));
-                } catch (IndexOutOfBoundsException e) {
-                    throw new IndexOutOfBoundsException("Something wrong with the input in a Address tag at row: " + lineCounter);
-                }
+                buildAddressObject(lineValues);
                 break;
             case "F":
-                try {
-                    objectTags.add(new FamilyTag(lineValues[TAG], lineValues[NAME], lineValues[BORN]));
-                } catch (IndexOutOfBoundsException e) {
-                    throw new IndexOutOfBoundsException("Something wrong with the input in a Family tag at row: " + lineCounter);
-                }
+                buildFamilyObject(lineValues);
                 break;
             default:
                 throw new IllegalArgumentException("Input tag: [" + tag + "] at row: " + lineCounter + ", does not exist, check your text file");
         }
+    }
+
+    private boolean buildPersonObject(String[] lineValues){
+        try {
+            objectTags.add(new PersonTag(lineValues[TAG], lineValues[FIRSTNAME], lineValues[LASTNAME]));
+        } catch (IndexOutOfBoundsException e) {
+            throw new IndexOutOfBoundsException("Something wrong with the input in a Person tag at row: " + lineCounter);
+        }
+        return true;
+    }
+
+    private boolean buildPhoneObject(String[] lineValues){
+        try {
+            objectTags.add(new PhoneTag(lineValues[TAG], lineValues[MOBILE], lineValues[HOME]));
+        } catch (IndexOutOfBoundsException e) {
+            throw new IndexOutOfBoundsException("Something wrong with the input in a Phone tag at row: " + lineCounter);
+        }
+        return true;
+    }
+
+    private boolean buildAddressObject(String[] lineValues){
+        try {
+            objectTags.add(new AddressTag(lineValues[TAG], lineValues[STREET], lineValues[CITY], lineValues[ZIP]));
+        } catch (IndexOutOfBoundsException e) {
+            throw new IndexOutOfBoundsException("Something wrong with the input in a Address tag at row: " + lineCounter);
+        }
+        return true;
+    }
+
+    private boolean buildFamilyObject(String[] lineValues){
+        try {
+            objectTags.add(new FamilyTag(lineValues[TAG], lineValues[NAME], lineValues[BORN]));
+        } catch (IndexOutOfBoundsException e) {
+            throw new IndexOutOfBoundsException("Something wrong with the input in a Family tag at row: " + lineCounter);
+        }
+        return true;
     }
 
     private boolean checkIfValuesContainsBadComments(String[] lineValues){

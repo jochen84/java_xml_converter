@@ -7,7 +7,7 @@ F|Alfred|2017
 A|Lingonstigen|Karlshamn|27449
 T||
 F||
-A||||
+A|||
 F||
 P|Oskar|Olsson
 F|Anna|9999
