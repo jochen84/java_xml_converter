@@ -9,6 +9,7 @@ import java.util.List;
 public class TextToObjectConverter {
 
     private List<Tag> objectTags = new ArrayList<>();
+    private int lineCounter = 0;
     private final int TAG = 0;
     private final int FIRSTNAME = 1;
     private final int LASTNAME = 2;
@@ -23,6 +24,7 @@ public class TextToObjectConverter {
     public List<Tag> convert (List<String> lines) {
 
         for ( String line : lines ) {
+            lineCounter++;
             String[] lineValues = line.split("\\|", -1);
             boolean hasBadComments =  checkIfValuesContainsBadComments(lineValues);
             boolean toManyValues = checkIfToManyValuesInLine(lineValues);
@@ -38,32 +40,32 @@ public class TextToObjectConverter {
                 try {
                     objectTags.add(new PersonTag(lineValues[TAG], lineValues[FIRSTNAME], lineValues[LASTNAME]));
                 } catch (IndexOutOfBoundsException e) {
-                    throw new IndexOutOfBoundsException("Something wrong with the input in a Person tag");
+                    throw new IndexOutOfBoundsException("Something wrong with the input in a Person tag at row: " + lineCounter);
                 }
                 break;
             case "T":
                 try {
                     objectTags.add(new PhoneTag(lineValues[TAG], lineValues[MOBILE], lineValues[HOME]));
                 } catch (IndexOutOfBoundsException e) {
-                    throw new IndexOutOfBoundsException("Something wrong with the input in a Phone tag");
+                    throw new IndexOutOfBoundsException("Something wrong with the input in a Phone tag at row: " + lineCounter);
                 }
                 break;
             case "A":
                 try {
                     objectTags.add(new AddressTag(lineValues[TAG], lineValues[STREET], lineValues[CITY], lineValues[ZIP]));
                 } catch (IndexOutOfBoundsException e) {
-                    throw new IndexOutOfBoundsException("Something wrong with the input in a Address tag");
+                    throw new IndexOutOfBoundsException("Something wrong with the input in a Address tag at row: " + lineCounter);
                 }
                 break;
             case "F":
                 try {
                     objectTags.add(new FamilyTag(lineValues[TAG], lineValues[NAME], lineValues[BORN]));
                 } catch (IndexOutOfBoundsException e) {
-                    throw new IndexOutOfBoundsException("Something wrong with the input in a Family tag");
+                    throw new IndexOutOfBoundsException("Something wrong with the input in a Family tag at row: " + lineCounter);
                 }
                 break;
             default:
-                throw new IllegalArgumentException("Input tag: [" + tag + "], does not exist, check your text file");
+                throw new IllegalArgumentException("Input tag: [" + tag + "] at row: " + lineCounter + ", does not exist, check your text file");
         }
     }
 
@@ -77,8 +79,8 @@ public class TextToObjectConverter {
     }
 
     private boolean checkIfToManyValuesInLine(String[] lineValues) {
-        if (lineValues.length > 4){
-            throw new ToManyValuesException("To many input values in the line");
+        if ((lineValues[TAG].matches("P|F|T") && lineValues.length > 3) || lineValues[TAG].equals("A") && lineValues.length > 4){
+            throw new ToManyValuesException("To many input values at row: " + lineCounter);
         }
         return false;
     }

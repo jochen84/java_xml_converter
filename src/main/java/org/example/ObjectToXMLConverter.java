@@ -32,39 +32,55 @@ public class ObjectToXMLConverter {
 
         boolean isFirstTag = throwErrorIfFirstTagNotEqualsP(currentTag);
         boolean isFamilyActive = closeFamilyTagIfActive(currentTag);
-        boolean toggleFamilyActive = toggleFamilyTag(currentTag);
+        boolean toggleFamilyActive = toggleFamilyTagIfF(currentTag);
 
         switch (currentTag) {
             case "P":
                 PersonTag personTag = (PersonTag)inputTag;
-                if (firstPerson) {
-                    finalXmlString.append("<people>" + indent[ONE] + "<person>" + indent[TWO] + personTag.getFirstNameWithTag() + indent[TWO] + personTag.getLastNameWithTag());
-                    firstPerson = false;
-                } else {
-                    finalXmlString.append(indent[ONE] + "</person>" + indent[ONE] + "<person>" + indent[TWO] + personTag.getFirstNameWithTag() + indent[TWO] + personTag.getLastNameWithTag());
-                }
+                finalXmlString.append(buildPersonTag(personTag));
                 break;
             case "T":
                 PhoneTag phoneTag = (PhoneTag)inputTag;
-                if (familyTagActive){
-                    finalXmlString.append(indent[THREE] + "<phone>" + indent[FOUR] + phoneTag.getMobileWithTag()+ indent[FOUR] + phoneTag.getHomeWithTag() + indent[THREE] + "</phone>");
-                } else {
-                    finalXmlString.append(indent[TWO] + "<phone>" + indent[THREE] + phoneTag.getMobileWithTag() + indent[THREE] + phoneTag.getHomeWithTag() + indent[TWO] + "</phone>");
-                }
+                finalXmlString.append(buildPhoneTag(phoneTag));
                 break;
             case "A":
                 AddressTag addressTag = (AddressTag)inputTag;
-                if (familyTagActive) {
-                    finalXmlString.append(indent[THREE] + "<address>" + indent[FOUR] + addressTag.getStreetWithTag() + indent[FOUR] + addressTag.getCitytWithTag() + indent[FOUR] + addressTag.getZipcodeWithTag() + indent[THREE] + "</address>");
-                } else {
-                    finalXmlString.append(indent[TWO] + "<address>" + indent[THREE] + addressTag.getStreetWithTag() + indent[THREE] + addressTag.getCitytWithTag() + indent[THREE] + addressTag.getZipcodeWithTag() + indent[TWO] + "</address>");
-                }
+                finalXmlString.append(buildAddressTag(addressTag));
                 break;
             case "F":
                 FamilyTag familyTag = (FamilyTag)inputTag;
-                finalXmlString.append(indent[TWO] + "<family>" + indent[THREE] + familyTag.getNameWithTag() + indent[THREE] + familyTag.getBornWithTag());
+                finalXmlString.append(buildFamilyTag(familyTag));
                 break;
         }
+    }
+
+    private String buildPersonTag(PersonTag personTag){
+        if (firstPerson) {
+            firstPerson = false;
+            return "<people>" + indent[ONE] + "<person>" + indent[TWO] + personTag.getFirstNameWithTag() + indent[TWO] + personTag.getLastNameWithTag();
+        } else {
+            return indent[ONE] + "</person>" + indent[ONE] + "<person>" + indent[TWO] + personTag.getFirstNameWithTag() + indent[TWO] + personTag.getLastNameWithTag();
+        }
+    }
+
+    private String buildPhoneTag(PhoneTag phoneTag){
+        if (familyTagActive){
+            return indent[THREE] + "<phone>" + indent[FOUR] + phoneTag.getMobileWithTag()+ indent[FOUR] + phoneTag.getHomeWithTag() + indent[THREE] + "</phone>";
+        } else {
+            return indent[TWO] + "<phone>" + indent[THREE] + phoneTag.getMobileWithTag() + indent[THREE] + phoneTag.getHomeWithTag() + indent[TWO] + "</phone>";
+        }
+    }
+
+    private String buildAddressTag(AddressTag addressTag){
+        if (familyTagActive) {
+            return indent[THREE] + "<address>" + indent[FOUR] + addressTag.getStreetWithTag() + indent[FOUR] + addressTag.getCitytWithTag() + indent[FOUR] + addressTag.getZipcodeWithTag() + indent[THREE] + "</address>";
+        } else {
+            return indent[TWO] + "<address>" + indent[THREE] + addressTag.getStreetWithTag() + indent[THREE] + addressTag.getCitytWithTag() + indent[THREE] + addressTag.getZipcodeWithTag() + indent[TWO] + "</address>";
+        }
+    }
+
+    private String buildFamilyTag(FamilyTag familyTag){
+        return indent[TWO] + "<family>" + indent[THREE] + familyTag.getNameWithTag() + indent[THREE] + familyTag.getBornWithTag();
     }
 
     private boolean throwErrorIfFirstTagNotEqualsP(String currentTag){
@@ -83,7 +99,7 @@ public class ObjectToXMLConverter {
         return familyTagActive;
     }
 
-    private boolean toggleFamilyTag(String currentTag){
+    private boolean toggleFamilyTagIfF(String currentTag){
         if (currentTag.equals("F")){
             familyTagActive = !familyTagActive;
         }

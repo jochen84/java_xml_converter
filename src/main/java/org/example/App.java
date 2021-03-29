@@ -15,7 +15,7 @@ public class App {
         //System.out.println("Enter file you want to convert:");
         //String filePath = sc.nextLine();
         //File inputFile = new File(filePath);
-        File inputFile = new File("input/konvertera2.txt");
+        File inputFile = new File("input/konvertera1.txt");
 
         ConvertFileName convertFileName = new ConvertFileName();
         String newFileName = convertFileName.getNewFileName(inputFile.getName());
