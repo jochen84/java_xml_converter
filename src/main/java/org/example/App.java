@@ -4,7 +4,6 @@ import org.example.model.Tag;
 
 import java.io.*;
 import java.util.List;
-import java.util.Scanner;
 
 public class App {
 
@@ -17,10 +16,10 @@ public class App {
         //File inputFile = new File(filePath);
         File inputFile = new File("input/konvertera1.txt");
 
-        ConvertFileName convertFileName = new ConvertFileName();
-        String newFileName = convertFileName.getNewFileName(inputFile.getName());
+        CreateNewXmlFileName convertFileName = new CreateNewXmlFileName();
+        String xmlFileName = convertFileName.getNewFileName(inputFile.getName());
 
-        File outputFile = new File("output/" + newFileName);
+        File outputFile = new File("output/" + xmlFileName);
 
         TheFileReader reader = new TheFileReader();
         List<String> linesFromFile = reader.readTextFile(inputFile);

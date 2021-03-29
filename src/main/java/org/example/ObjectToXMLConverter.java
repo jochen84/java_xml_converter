@@ -22,7 +22,6 @@ public class ObjectToXMLConverter {
         for (Tag objTag : objectTags ) {
             objectToXmlTag(objTag);
         }
-
         closePeopleXmlTagsWhenEndOfList();
         return finalXmlString.toString();
     }

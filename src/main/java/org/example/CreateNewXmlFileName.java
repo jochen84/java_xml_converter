@@ -1,6 +1,6 @@
 package org.example;
 
-public class ConvertFileName {
+public class CreateNewXmlFileName {
 
     public String getNewFileName(String fileName){
         String newFile = changeFileExtension(fileName);
