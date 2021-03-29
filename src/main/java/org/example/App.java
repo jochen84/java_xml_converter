@@ -32,7 +32,4 @@ public class App {
         TheFileWriter writer = new TheFileWriter();
         String writtenText = writer.writeToXmlFile(outputFile, finalString);
     }
-
-
-
 }
