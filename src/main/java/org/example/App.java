@@ -18,7 +18,7 @@ public class App {
         CreateNewXmlFileName convertFileName = new CreateNewXmlFileName();
         String xmlFileName = convertFileName.getNewFileName(inputFile.getName());
 
-        File outputFile = new File("output/" + xmlFileName);
+        File outputFile = new File(xmlFileName);
 
         TheFileReader reader = new TheFileReader();
         List<String> linesFromFile = reader.readTextFile(inputFile);
